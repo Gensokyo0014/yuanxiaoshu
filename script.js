@@ -181,8 +181,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const autoplayDelay = 4000; // 4 seconds
 
   function updateCarousel() {
-    // Slide container to target position
-    polaroidRow.style.transform = `translateX(-${currentSlide * 100}%)`;
+    // Toggle active class on slides to trigger fade transition
+    slides.forEach((slide, idx) => {
+      if (idx === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
     
     // Update dots indicator active states
     dots.forEach((dot, idx) => {

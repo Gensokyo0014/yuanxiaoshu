@@ -403,17 +403,28 @@ body {
 /* Polaroid Track showing side-by-side matching the picture */
 .polaroid-row {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   width: 100%;
+  position: relative;
 }
 
 .polaroid-slide {
   flex: 0 0 100%;
+  margin-right: -100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px 0 20px 0;
   box-sizing: border-box;
+  z-index: 1;
+}
+
+.polaroid-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
 }
 
 .polaroid-item {
