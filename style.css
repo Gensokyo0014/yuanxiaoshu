@@ -1037,6 +1037,46 @@ body {
   border-color: #ffffff;
 }
 
+/* --- 8. Lock Modal Styles --- */
+.lock-box {
+  border: 1px solid rgba(255, 158, 187, 0.3) !important;
+  box-shadow: 0 12px 40px rgba(255, 82, 128, 0.25) !important;
+  max-width: 380px !important;
+}
+
+.lock-modal__content {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.lock-modal__icon {
+  font-size: 48px;
+  animation: float 3s infinite ease-in-out;
+}
+
+.lock-modal__text {
+  font-size: 13.5px;
+  color: var(--color-gold);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.lock-modal__countdown {
+  font-size: 13px;
+  color: var(--color-rose);
+  background: rgba(255, 158, 187, 0.1);
+  border: 1px solid rgba(255, 158, 187, 0.25);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  font-family: var(--font-number);
+}
+
 /* --- 9. Mobile Responsive Layout Adapters --- */
 @media screen and (max-width: 580px) {
   .app-container {

@@ -280,8 +280,72 @@ document.addEventListener('DOMContentLoaded', () => {
   const giftBox = document.getElementById('giftBox');
   const surpriseOverlay = document.getElementById('surpriseOverlay');
   const closeSurprise = document.getElementById('closeSurprise');
+  
+  // Lock Modal Elements
+  const lockModal = document.getElementById('lockModal');
+  const closeLockBtn = document.getElementById('closeLockBtn');
+  const lockCountdown = document.getElementById('lockCountdown');
+
+  // Developer Bypass Easter Egg
+  let devClicks = 0;
+  let isBypassed = false;
+  giftBox.addEventListener('click', () => {
+    devClicks++;
+    if (devClicks >= 5 && !isBypassed) {
+      isBypassed = true;
+      // Trigger sparklers to indicate success
+      const rect = giftBox.getBoundingClientRect();
+      for (let i = 0; i < 30; i++) {
+        sparkles.push(new Sparkle(
+          rect.left + rect.width / 2,
+          rect.top + rect.height / 2,
+          '#ff9ebb',
+          true
+        ));
+      }
+      alert("❤️ [测试通道] 惊喜礼盒已临时解封！点击“打开礼物”即可预览内容。");
+    }
+  });
+
+  // Countdown timer for Lock Modal
+  let lockTimer = null;
+  function updateLockCountdown() {
+    const now = new Date().getTime();
+    // Unlock target date: June 27th, 2026
+    const unlockTarget = new Date('2026-06-27T00:00:00').getTime();
+    let diff = unlockTarget - now;
+
+    if (diff <= 0) {
+      lockCountdown.innerText = "礼物解封时间已到！请刷新页面开启！";
+      if (lockTimer) clearInterval(lockTimer);
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    lockCountdown.innerText = `距离解封还有：${d}天 ${h}小时 ${m}分 ${s}秒`;
+  }
 
   giftBtn.addEventListener('click', () => {
+    // Check Date restriction (June 27th or 28th)
+    const today = new Date();
+    const isJune = today.getMonth() === 5; // 0-indexed: 5 is June
+    const is27or28 = today.getDate() === 27 || today.getDate() === 28;
+    
+    if (!isJune || !is27or28) {
+      if (!isBypassed) {
+        // Show Lock Modal
+        lockModal.classList.add('active');
+        updateLockCountdown();
+        if (lockTimer) clearInterval(lockTimer);
+        lockTimer = setInterval(updateLockCountdown, 1000);
+        return;
+      }
+    }
+
     // Stage 1: Shake gift box
     giftBox.classList.add('shake-animation');
     
@@ -346,6 +410,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   closeSurprise.addEventListener('click', () => {
     surpriseOverlay.classList.remove('active');
+  });
+
+  closeLockBtn.addEventListener('click', () => {
+    lockModal.classList.remove('active');
+    if (lockTimer) {
+      clearInterval(lockTimer);
+      lockTimer = null;
+    }
   });
 
 
