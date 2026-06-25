@@ -1,0 +1,1053 @@
+/* 
+   YuanXiaoshu Birthday Web Page - Premium 1:1 Visual Styling System
+   Deep Purple Amethyst, Soft Rose Aura, Champagne Gold & Custom SVG Lights
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* --- Theme Design Tokens --- */
+:root {
+  --font-script: 'Great Vibes', cursive;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-number: 'Montserrat', sans-serif;
+
+  /* Color Palette matching the design image precisely */
+  --bg-gradient: linear-gradient(to bottom, #190a2a 0%, #30114b 35%, #4b176b 70%, #68218e 100%);
+  --color-rose: #ff9ebb;       /* Soft pink */
+  --color-gold: #fcf1d8;       /* Creamy Champagne Gold */
+  --color-gold-bright: #ffeaa7; /* Glowing warm light */
+  --color-magenta: #e84393;    /* Highlight pink */
+  
+  --card-glass-light: rgba(255, 255, 255, 0.1);
+  --card-glass-dark: rgba(26, 11, 46, 0.65);
+  --card-border: 1px solid rgba(255, 255, 255, 0.14);
+  --card-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  --backdrop-blur: blur(16px);
+}
+
+/* --- Global Reset & Animations --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: #ffffff;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Starfield Canvas Background */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.app-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px; /* Locked to match the premium portrait grid */
+  margin: 0 auto;
+  padding: 0 16px 60px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- Core Keyframe Animations --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes float-balloon-left {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(-2deg); }
+  50% { transform: translate(-5px, -15px) scale(1.03) rotate(2deg); }
+}
+
+@keyframes float-balloon-right {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(2deg); }
+  50% { transform: translate(5px, -12px) scale(1.02) rotate(-2deg); }
+}
+
+@keyframes bulb-glow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 2px var(--color-gold-bright)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 12px var(--color-gold-bright)); }
+}
+
+@keyframes text-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(252, 241, 216, 0.3), 0 0 15px rgba(252, 241, 216, 0.1); }
+  50% { text-shadow: 0 0 20px rgba(252, 241, 216, 0.6), 0 0 35px rgba(252, 241, 216, 0.3); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(255, 82, 128, 0.4); }
+  50% { transform: scale(1.04); box-shadow: 0 0 30px rgba(255, 82, 128, 0.8); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(-6deg); }
+  40%, 80% { transform: rotate(6deg); }
+}
+
+/* --- SVG Hanging String Lights --- */
+.string-lights-container {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  margin-bottom: -15px;
+}
+
+.string-lights {
+  width: 100%;
+  height: 55px;
+  display: block;
+}
+
+.bulb {
+  animation: bulb-glow 2.5s infinite ease-in-out;
+}
+
+.bulb:nth-child(even) {
+  animation-delay: 0.8s;
+  fill: var(--color-rose);
+}
+
+.bulb:nth-child(3n) {
+  animation-delay: 1.5s;
+  fill: #81ecec;
+}
+
+/* --- 1. Hero Block (Birthday Header) --- */
+.hero {
+  text-align: center;
+  position: relative;
+  padding: 40px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Starry Moon on left & right fireworks decorative placement */
+.hero__decor-moon {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 34px;
+  color: var(--color-gold);
+  filter: drop-shadow(0 0 10px rgba(252, 241, 216, 0.6));
+  animation: float 4s infinite ease-in-out;
+}
+
+.hero__decor-firework {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 38px;
+  opacity: 0.85;
+  animation: float 5s infinite ease-in-out;
+}
+
+/* Floating Balloons Left & Right */
+.balloon-left {
+  position: absolute;
+  left: -20px;
+  top: 120px;
+  font-size: 46px;
+  opacity: 0.7;
+  pointer-events: none;
+  animation: float-balloon-left 6s infinite ease-in-out;
+}
+
+.balloon-right {
+  position: absolute;
+  right: -15px;
+  top: 100px;
+  font-size: 42px;
+  opacity: 0.65;
+  pointer-events: none;
+  animation: float-balloon-right 5.5s infinite ease-in-out;
+}
+
+.hero__title {
+  font-family: var(--font-script);
+  font-size: 72px;
+  color: var(--color-gold);
+  line-height: 0.9;
+  font-weight: 400;
+  margin-bottom: 12px;
+  animation: text-glow 3s infinite ease-in-out;
+  position: relative;
+}
+
+/* Floating pink party hat resting on the title B */
+.hero__hat {
+  position: absolute;
+  font-size: 30px;
+  top: 38px;
+  left: 105px;
+  transform: rotate(-18deg);
+  animation: float 3.5s infinite ease-in-out;
+}
+
+/* Premium Curved Ribbon */
+.hero__ribbon-wrapper {
+  margin: 10px 0 18px 0;
+  position: relative;
+}
+
+.hero__ribbon {
+  background: linear-gradient(90deg, #ff7ea5 0%, #ff5280 50%, #ff7ea5 100%);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 30px;
+  border-radius: 30px;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 18px rgba(255, 82, 128, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__ribbon::before, .hero__ribbon::after {
+  content: '♥';
+  color: var(--color-gold);
+  font-size: 11px;
+}
+
+.hero__blessing {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  line-height: 2.1;
+  color: var(--color-text-sub);
+  letter-spacing: 0.8px;
+  text-align: center;
+  max-width: 90%;
+  white-space: pre-line;
+  margin-bottom: 12px;
+}
+
+.hero__heart-glow {
+  color: var(--color-rose);
+  font-size: 15px;
+  animation: float 3s infinite ease-in-out;
+  margin-top: 5px;
+}
+
+/* Cozy Shelf elements */
+.hero__shelf {
+  width: 90%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 80%, transparent);
+  margin-top: 15px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.shelf-light-left {
+  position: absolute;
+  top: -30px;
+  left: 15px;
+  font-size: 22px;
+  filter: drop-shadow(0 0 8px rgba(255,234,167,0.8));
+}
+
+.shelf-light-right {
+  position: absolute;
+  top: -34px;
+  right: 15px;
+  font-size: 24px;
+  filter: drop-shadow(0 0 10px rgba(255,158,187,0.7));
+}
+
+/* --- 2. Countdown Block --- */
+.countdown-card {
+  background: var(--card-glass-light);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 24px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.countdown-card__title {
+  font-size: 13px;
+  color: var(--color-text-sub);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-card__title::before, .countdown-card__title::after {
+  content: '♥';
+  color: var(--color-rose);
+}
+
+.countdown-card__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.countdown-card__box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px 6px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+.countdown-card__box:hover {
+  border-color: rgba(255, 158, 187, 0.35);
+  transform: translateY(-2px);
+}
+
+.countdown-card__number {
+  font-family: var(--font-number);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-rose);
+  text-shadow: 0 2px 10px rgba(255, 158, 187, 0.25);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.countdown-card__label {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  font-weight: 400;
+}
+
+.countdown-card__hint {
+  font-size: 11px;
+  color: var(--color-rose);
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 158, 187, 0.1);
+  border: 1px solid rgba(255, 158, 187, 0.2);
+  padding: 6px 20px;
+  border-radius: 30px;
+}
+
+/* --- 3. Beautiful Memories (Polaroid Row) --- */
+.memories-card {
+  background: var(--card-glass-light);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.memories-card__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.memories-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.memories-card__subtitle {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  opacity: 0.85;
+}
+
+/* Rounded Dark Inner Container for the Polaroid Row */
+.memories-card__inner-container {
+  background: rgba(22, 10, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 30px 16px 20px 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Polaroid Track showing side-by-side matching the picture */
+.polaroid-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 10px 4px 20px 4px;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hide scrollbar for clean look */
+}
+
+.polaroid-row::-webkit-scrollbar {
+  display: none;
+}
+
+.polaroid-item {
+  flex: 0 0 150px;
+  background: #ffffff;
+  padding: 8px 8px 16px 8px;
+  border-radius: 3px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Semi-transparent Scotch Tape decoration */
+.polaroid-item::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  width: 50px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(1.5px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  z-index: 5;
+}
+
+/* Alternating Tilted Angles to match the original style */
+.polaroid-item:nth-child(1) { transform: rotate(-3deg); }
+.polaroid-item:nth-child(2) { transform: rotate(2deg); }
+.polaroid-item:nth-child(3) { transform: rotate(-1deg); }
+.polaroid-item:nth-child(4) { transform: rotate(3deg); }
+.polaroid-item:nth-child(5) { transform: rotate(-2deg); }
+
+.polaroid-item:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  z-index: 10;
+}
+
+.polaroid-item__img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 1px;
+  margin-bottom: 8px;
+}
+
+.polaroid-item__caption {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  color: #333333;
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Dots Indicators */
+.memories-card__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.memories-card__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.memories-card__dot--active {
+  background: var(--color-rose);
+  transform: scale(1.2);
+  box-shadow: 0 0 6px var(--color-rose);
+}
+
+/* --- 4. Personal Letter Card --- */
+.letter-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 24px;
+  padding: 26px;
+}
+
+.letter-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.letter-card__title::after {
+  content: '💖';
+  font-size: 12px;
+}
+
+.letter-card__layout {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Envelope 3D visual styling */
+.letter-card__envelope-wrapper {
+  flex: 0 0 110px;
+  display: flex;
+  justify-content: center;
+}
+
+.envelope-element {
+  position: relative;
+  width: 100px;
+  height: 72px;
+  background: #fbc6d0;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.envelope-element__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 42px solid #ffacbc;
+  transform-origin: top;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 3;
+}
+
+.envelope-element__letter {
+  position: absolute;
+  bottom: 6px;
+  left: 10px;
+  width: 80px;
+  height: 52px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 700;
+  color: #ff5280;
+}
+
+.envelope-element__letter::after {
+  content: '♥';
+  font-size: 11px;
+  color: #ff5280;
+  margin-top: 2px;
+}
+
+.envelope-element:hover {
+  transform: translateY(-4px);
+}
+
+.envelope-element:hover .envelope-element__flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-element:hover .envelope-element__letter {
+  transform: translateY(-24px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Beautiful Typewriter Text */
+.letter-card__text {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 2.1;
+  color: #ece2f5;
+  letter-spacing: 0.5px;
+}
+
+.letter-card__line {
+  margin-bottom: 6px;
+  opacity: 0.95;
+}
+
+.letter-card__line:last-child {
+  margin-bottom: 0;
+  color: var(--color-rose);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* --- 5. Split-Screen Gift Card Block (1:1 design) --- */
+.gift-panel {
+  background: var(--card-glass-dark);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 24px;
+  padding: 30px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gift-panel__left {
+  flex: 0 0 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Spot light reflect ground for the box */
+.gift-panel__reflect-floor {
+  position: absolute;
+  bottom: 0;
+  width: 140px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(255, 158, 187, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.gift-panel__box-img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.gift-panel__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.gift-panel__title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gift-panel__subtitle {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  margin-bottom: 8px;
+}
+
+/* Big Glowing Pill Shaped Pink Button */
+.gift-panel__btn {
+  background: linear-gradient(90deg, #ff7ba0 0%, #ff5280 50%, #ff7ba0 100%);
+  background-size: 200% auto;
+  border: none;
+  color: #ffffff;
+  padding: 10px 28px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 40px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 15px rgba(255, 82, 128, 0.4);
+  transition: all 0.3s ease;
+  animation: pulse-glow 2s infinite ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gift-panel__btn:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+}
+
+.gift-panel__caption {
+  font-size: 10px;
+  color: var(--color-text-sub);
+  opacity: 0.7;
+}
+
+/* --- 6. Footer Block --- */
+.footer {
+  text-align: center;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer__made {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.footer__made::after {
+  content: '❤';
+  color: var(--color-rose);
+}
+
+.footer__author {
+  font-size: 10px;
+  color: var(--color-text-sub);
+  opacity: 0.85;
+}
+
+.footer__date {
+  font-size: 10px;
+  color: var(--color-text-sub);
+  opacity: 0.6;
+}
+
+/* --- 7. Music Player Floating Button --- */
+.music-controller {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  border: var(--card-border);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.music-controller:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 158, 187, 0.4);
+}
+
+.music-controller.playing {
+  animation: rotate 8s infinite linear;
+}
+
+.music-controller__icon {
+  font-size: 14px;
+  color: var(--color-rose);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- 8. Confetti Drawer surprise overlay --- */
+.overlay-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(18, 7, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 16px;
+}
+
+.overlay-drawer.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.surprise-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+  padding: 30px 24px;
+  text-align: center;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.overlay-drawer.active .surprise-box {
+  transform: scale(1) translateY(0);
+}
+
+.surprise-box__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--color-gold);
+  margin-bottom: 6px;
+}
+
+.surprise-box__subtitle {
+  font-size: 12px;
+  color: var(--color-text-sub);
+  margin-bottom: 24px;
+}
+
+.surprise-box__coupons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+/* 3D Coupon Stack Mechanics */
+.love-coupon {
+  perspective: 1000px;
+  height: 80px;
+  cursor: pointer;
+}
+
+.love-coupon__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-style: preserve-3d;
+}
+
+.love-coupon.flipped .love-coupon__inner {
+  transform: rotateY(180deg);
+}
+
+.love-coupon__front, .love-coupon__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.love-coupon__front {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+}
+
+.love-coupon__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.love-coupon__icon {
+  font-size: 24px;
+}
+
+.love-coupon__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.love-coupon__desc {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  margin-top: 4px;
+}
+
+.love-coupon__arrow {
+  color: var(--color-rose);
+  font-size: 15px;
+}
+
+.love-coupon__back {
+  background: linear-gradient(135deg, #ff7ba0 0%, #ff5280 100%);
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(255, 82, 128, 0.3);
+}
+
+.love-coupon__msg {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: left;
+  flex: 1;
+  padding-right: 10px;
+  line-height: 1.5;
+}
+
+.love-coupon__redeem-btn {
+  background: #ffffff;
+  color: #ff5280;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.love-coupon__redeem-btn:hover {
+  transform: scale(1.08);
+}
+
+.surprise-box__close {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 8px 24px;
+  font-size: 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.surprise-box__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+/* --- 9. Mobile Responsive Layout Adapters --- */
+@media screen and (max-width: 580px) {
+  .app-container {
+    padding: 0 12px 40px 12px;
+    gap: 20px;
+  }
+
+  .hero__title {
+    font-size: 58px;
+  }
+
+  .hero__hat {
+    top: 28px;
+    left: 85px;
+    font-size: 24px;
+  }
+
+  .countdown-card__number {
+    font-size: 26px;
+  }
+
+  .countdown-card__box {
+    padding: 10px 4px;
+  }
+
+  .polaroid-item {
+    flex: 0 0 135px;
+    padding: 6px 6px 14px 6px;
+  }
+
+  .polaroid-item__caption {
+    font-size: 9px;
+  }
+
+  .letter-card__layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .letter-card__envelope-wrapper {
+    flex: auto;
+  }
+
+  .gift-panel {
+    flex-direction: column;
+    padding: 24px 16px;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .gift-panel__left {
+    flex: auto;
+  }
+
+  .gift-panel__right {
+    align-items: center;
+  }
+
+  .surprise-box {
+    padding: 24px 16px;
+  }
+
+  .love-coupon {
+    height: 75px;
+  }
+
+  .love-coupon__front, .love-coupon__back {
+    padding: 10px 14px;
+  }
+}

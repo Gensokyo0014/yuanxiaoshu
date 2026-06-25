@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>致：元小叔 - 祝你生日快乐 ❤</title>
+  
+  <!-- SEO Optimization -->
+  <meta name="description" content="专属于元小叔的生日快乐祝福网页，内含美好回忆、深情寄语与生日礼物兑换券惊喜。">
+  <meta name="keywords" content="生日快乐, 元小叔, 恋爱倒计时, 暖心寄语, 生日礼盒">
+  <meta name="author" content="你的专属小迷妹">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Twinkling Starfield Canvas Background -->
+  <canvas id="starfield"></canvas>
+
+  <!-- BGM Minimal Audio Controller -->
+  <div class="music-controller" id="audioPlayer" title="背景音乐播放/暂停">
+    <div class="music-controller__icon" id="musicIcon">🔇</div>
+  </div>
+  <audio id="bgm" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+    您的浏览器不支持音频元素播放。
+  </audio>
+
+  <!-- Premium Hanging String Lights (Top of page, curved SVG wire) -->
+  <div class="string-lights-container">
+    <svg class="string-lights" viewBox="0 0 640 60" xmlns="http://www.w3.org/2000/svg">
+      <!-- Curved wires -->
+      <path d="M0,5 Q80,45 160,5 Q240,45 320,5 Q400,45 480,5 Q560,45 640,5" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+      <!-- Glowing lightbulbs dangling from wires -->
+      <circle class="bulb" cx="40" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="40" y1="5" x2="40" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+      
+      <circle class="bulb" cx="120" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="120" y1="5" x2="120" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+      
+      <circle class="bulb" cx="200" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="200" y1="5" x2="200" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="280" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="280" y1="5" x2="280" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="360" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="360" y1="5" x2="360" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="440" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="440" y1="5" x2="440" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="520" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="520" y1="5" x2="520" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="600" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="600" y1="5" x2="600" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+    </svg>
+  </div>
+
+  <!-- Main Responsive Application Container -->
+  <div class="app-container">
+
+    <!-- 1. Hero Block (Birthday Header) -->
+    <header class="hero" id="heroBlock">
+      <div class="hero__decor-moon">🌙</div>
+      <div class="hero__decor-firework">🎆</div>
+      
+      <!-- Translucent floating balloons left & right -->
+      <div class="balloon-left">🎈🎈</div>
+      <div class="balloon-right">🎈</div>
+
+      <!-- Main Script title "Happy Birthday" with decorative party hat -->
+      <h1 class="hero__title" id="mainTitle">
+        Happy<br>Birthday
+        <span class="hero__hat">🎉</span>
+      </h1>
+      
+      <!-- 1:1 Ribbons wrapper -->
+      <div class="hero__ribbon-wrapper">
+        <span class="hero__ribbon">生日快乐，我亲爱的人</span>
+      </div>
+      
+      <!-- Dynamic Champagne text message -->
+      <p class="hero__blessing" id="sweetWords">愿你所求皆如愿，所行皆坦途
+多喜乐，长安宁
+愿新的一岁，平安喜乐，万事胜意！</p>
+      
+      <div class="hero__heart-glow">❤</div>
+      
+      <!-- Cozy Shelf displaying lights & flowers -->
+      <div class="hero__shelf">
+        <span class="shelf-light-left" title="星星彩灯">⭐</span>
+        <span class="shelf-light-right" title="鸟笼花灯">🏮</span>
+      </div>
+    </header>
+
+    <!-- 2. Countdown Block -->
+    <section class="countdown-card" id="countdownCard">
+      <h2 class="countdown-card__title">距离你的生日还有</h2>
+      
+      <div class="countdown-card__grid">
+        <div class="countdown-card__box">
+          <span class="countdown-card__number" id="days">00</span>
+          <span class="countdown-card__label">天</span>
+        </div>
+        <div class="countdown-card__box">
+          <span class="countdown-card__number" id="hours">00</span>
+          <span class="countdown-card__label">小时</span>
+        </div>
+        <div class="countdown-card__box">
+          <span class="countdown-card__number" id="minutes">00</span>
+          <span class="countdown-card__label">分钟</span>
+        </div>
+        <div class="countdown-card__box">
+          <span class="countdown-card__number" id="seconds">00</span>
+          <span class="countdown-card__label">秒</span>
+        </div>
+      </div>
+      
+      <div class="countdown-card__hint">
+        🎂 生日当天会有特别惊喜哦！
+      </div>
+    </section>
+
+    <!-- 3. Beautiful Memories (Side-by-side Polaroid Cards) -->
+    <section class="memories-card" id="memoriesCard">
+      <div class="memories-card__header">
+        <h2 class="memories-card__title">📷 美好回忆</h2>
+        <p class="memories-card__subtitle">一起走过的时光，都是我最珍贵的记忆</p>
+      </div>
+      
+      <div class="memories-card__inner-container">
+        <div class="polaroid-row" id="polaroidRow">
+          <!-- Slide 1 -->
+          <div class="polaroid-item">
+            <img src="assets/polaroid1.png" alt="梦幻海边夕阳" class="polaroid-item__img">
+            <div class="polaroid-item__caption">梦幻海边夕阳</div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="polaroid-item">
+            <img src="assets/polaroid2.png" alt="晨光下的郁金香" class="polaroid-item__img">
+            <div class="polaroid-item__caption">晨光下的郁金香</div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="polaroid-item">
+            <img src="assets/polaroid3.png" alt="许愿瓶里的微光" class="polaroid-item__img">
+            <div class="polaroid-item__caption">许愿瓶里的微光</div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="polaroid-item">
+            <img src="assets/polaroid4.png" alt="粉紫色星空月影" class="polaroid-item__img">
+            <div class="polaroid-item__caption">粉紫色星空月影</div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="polaroid-item">
+            <img src="assets/polaroid5.png" alt="晚霞中的雏菊" class="polaroid-item__img">
+            <div class="polaroid-item__caption">晚霞中的雏菊</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="memories-card__dots">
+        <span class="memories-card__dot memories-card__dot--active"></span>
+        <span class="memories-card__dot"></span>
+        <span class="memories-card__dot"></span>
+        <span class="memories-card__dot"></span>
+        <span class="memories-card__dot"></span>
+      </div>
+    </section>
+
+    <!-- 4. Personal Letter Card -->
+    <section class="letter-card" id="letterCard">
+      <h2 class="letter-card__title">有些话，想对欲说</h2>
+      
+      <div class="letter-card__layout">
+        <!-- Envelope 3D Visual -->
+        <div class="letter-card__envelope-wrapper">
+          <div class="envelope-element">
+            <div class="envelope-element__flap"></div>
+            <div class="envelope-element__letter">For You</div>
+          </div>
+        </div>
+        
+        <!-- sweet words typewriter alignment -->
+        <div class="letter-card__text">
+          <p class="letter-card__line">感谢你的出现，让我的世界变得更加美好。</p>
+          <p class="letter-card__line">你的笑容，是我每天的动力；</p>
+          <p class="letter-card__line">你的陪伴，是我最安心的时光。</p>
+          <p class="letter-card__line">愿未来的日子里，我们一起看更多的风景，</p>
+          <p class="letter-card__line">一起创造更多的回忆，一起走向更美好的未来。</p>
+          <p class="letter-card__line">生日快乐，我最爱的人！</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Split-Screen Gift Card Block (1:1 styling) -->
+    <section class="gift-panel" id="giftCard">
+      <div class="gift-panel__left">
+        <!-- Spotlight reflect base floor -->
+        <div class="gift-panel__reflect-floor"></div>
+        <img src="assets/gift_box.png" alt="精美生日礼盒" class="gift-panel__box-img" id="giftBox">
+      </div>
+      
+      <div class="gift-panel__right">
+        <h2 class="gift-panel__title">🎁 点击领取生日礼物 ♡</h2>
+        <p class="gift-panel__subtitle">一份专属于你的惊喜</p>
+        
+        <button class="gift-panel__btn" id="giftBtn">
+          打开礼物 🎁
+        </button>
+        
+        <p class="gift-panel__caption">（点击按钮，开启惊喜吧！）</p>
+      </div>
+    </section>
+
+    <!-- 6. Footer Block -->
+    <footer class="footer" id="footerBlock">
+      <div class="footer__made">Made With </div>
+      <div class="footer__author">By 你的陶嘉为</div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Post-Click Surprise Gift Overlay Container -->
+  <div class="overlay-drawer" id="surpriseOverlay">
+    <div class="surprise-box">
+      <h3 class="surprise-box__title">祝你生日快乐，我的至爱！</h3>
+      <p class="surprise-box__subtitle">为小叔送上三张专属生日礼物兑换券，随时可以兑现哦 💖</p>
+      
+      <div class="surprise-box__coupons">
+        <!-- Coupon 1 -->
+        <div class="love-coupon">
+          <div class="love-coupon__inner">
+            <div class="love-coupon__front">
+              <div class="love-coupon__info">
+                <span class="love-coupon__icon">💖</span>
+                <div>
+                  <div class="love-coupon__name">大餐游玩陪伴券</div>
+                  <div class="love-coupon__desc">陪伴是最长情的告白</div>
+                </div>
+              </div>
+              <span class="love-coupon__arrow">➔</span>
+            </div>
+            <div class="love-coupon__back">
+              <span class="love-coupon__msg">陪你去你想去的任何地方，吃任何大餐！</span>
+              <button class="love-coupon__redeem-btn">兑现奖励</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupon 2 -->
+        <div class="love-coupon">
+          <div class="love-coupon__inner">
+            <div class="love-coupon__front">
+              <div class="love-coupon__info">
+                <span class="love-coupon__icon">🎁</span>
+                <div>
+                  <div class="love-coupon__name">无条件愿望券</div>
+                  <div class="love-coupon__desc">心愿成真，绝不拒绝</div>
+                </div>
+              </div>
+              <span class="love-coupon__arrow">➔</span>
+            </div>
+            <div class="love-coupon__back">
+              <span class="love-coupon__msg">无条件满足你的一个小愿望，随时兑现！</span>
+              <button class="love-coupon__redeem-btn">兑现奖励</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupon 3 -->
+        <div class="love-coupon">
+          <div class="love-coupon__inner">
+            <div class="love-coupon__front">
+              <div class="love-coupon__info">
+                <span class="love-coupon__icon">🤗</span>
+                <div>
+                  <div class="love-coupon__name">专属暖心抱抱券</div>
+                  <div class="love-coupon__desc">专属的温暖与依靠</div>
+                </div>
+              </div>
+              <span class="love-coupon__arrow">➔</span>
+            </div>
+            <div class="love-coupon__back">
+              <span class="love-coupon__msg">在你需要温暖时，提供最坚固温暖的臂膀！</span>
+              <button class="love-coupon__redeem-btn">兑现奖励</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="surprise-box__close" id="closeSurprise">收起惊喜</button>
+    </div>
+  </div>
+
+  <!-- Bottom Hanging String Lights (curved SVG wire) -->
+  <div class="string-lights-container" style="margin-top: -30px;">
+    <svg class="string-lights" viewBox="0 0 640 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,5 Q80,45 160,5 Q240,45 320,5 Q400,45 480,5 Q560,45 640,5" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+      <circle class="bulb" cx="40" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="40" y1="5" x2="40" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+      
+      <circle class="bulb" cx="120" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="120" y1="5" x2="120" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+      
+      <circle class="bulb" cx="200" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="200" y1="5" x2="200" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="280" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="280" y1="5" x2="280" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="360" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="360" y1="5" x2="360" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="440" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="440" y1="5" x2="440" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="520" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="520" y1="5" x2="520" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+      <circle class="bulb" cx="600" cy="20" r="5" fill="#ffeaa7" />
+      <line x1="600" y1="5" x2="600" y2="20" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+    </svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
