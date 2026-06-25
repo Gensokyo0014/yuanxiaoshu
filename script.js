@@ -169,27 +169,24 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
 
 
-  // --- 3. Scroll-Aware Polaroid Row Pagination ---
+  // --- 3. Premium Carousel Slider for Polaroid Cards ---
   const polaroidRow = document.getElementById('polaroidRow');
-  const polaroids = document.querySelectorAll('.polaroid-item');
+  const slides = document.querySelectorAll('.polaroid-slide');
   const dots = document.querySelectorAll('.memories-card__dot');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  
+  let currentSlide = 0;
+  let autoplayTimer = null;
+  const autoplayDelay = 4000; // 4 seconds
 
-  function updateActiveDot() {
-    const scrollLeft = polaroidRow.scrollLeft;
-    const containerWidth = polaroidRow.clientWidth;
-    const scrollWidth = polaroidRow.scrollWidth;
+  function updateCarousel() {
+    // Slide container to target position
+    polaroidRow.style.transform = `translateX(-${currentSlide * 100}%)`;
     
-    // Calculate current slide index based on scroll position
-    let activeIndex = 0;
-    if (scrollWidth > containerWidth) {
-      const maxScroll = scrollWidth - containerWidth;
-      const ratio = scrollLeft / maxScroll;
-      activeIndex = Math.min(dots.length - 1, Math.round(ratio * (dots.length - 1)));
-    }
-
     // Update dots indicator active states
     dots.forEach((dot, idx) => {
-      if (idx === activeIndex) {
+      if (idx === currentSlide) {
         dot.classList.add('memories-card__dot--active');
       } else {
         dot.classList.remove('memories-card__dot--active');
@@ -197,22 +194,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Click dot to scroll to the corresponding polaroid item
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateCarousel();
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, autoplayDelay);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  // Prev/Next buttons event listeners
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    startAutoplay(); // Reset timer on user interaction
+  });
+
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    startAutoplay(); // Reset timer on user interaction
+  });
+
+  // Dots click event listeners
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
-      const itemWidth = polaroids[0].offsetWidth;
-      const gap = 16; // CSS gap spacing
-      const scrollPosition = index * (itemWidth + gap);
-      
-      polaroidRow.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
+      currentSlide = index;
+      updateCarousel();
+      startAutoplay(); // Reset timer on user interaction
     });
   });
 
-  // Attach scroll listener
-  polaroidRow.addEventListener('scroll', updateActiveDot);
+  // Pause autoplay when hovering over the memories card area
+  const memoriesCard = document.getElementById('memoriesCard');
+  memoriesCard.addEventListener('mouseenter', stopAutoplay);
+  memoriesCard.addEventListener('mouseleave', startAutoplay);
+
+  // Initialize carousel & start autoplay
+  updateCarousel();
+  startAutoplay();
 
 
   // --- 4. BGM Music Controller with Rotation Sync ---

@@ -403,23 +403,25 @@ body {
 /* Polaroid Track showing side-by-side matching the picture */
 .polaroid-row {
   display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 10px 4px 20px 4px;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Hide scrollbar for clean look */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
 }
 
-.polaroid-row::-webkit-scrollbar {
-  display: none;
+.polaroid-slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 20px 0;
+  box-sizing: border-box;
 }
 
 .polaroid-item {
-  flex: 0 0 150px;
+  width: 250px;
   background: #ffffff;
-  padding: 8px 8px 16px 8px;
-  border-radius: 3px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  padding: 10px 10px 20px 10px;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   position: relative;
   transition: all 0.3s ease;
 }
@@ -441,12 +443,12 @@ body {
 }
 
 /* Alternating Tilted Angles to match the original style */
-.polaroid-item:nth-child(1) { transform: rotate(-3deg); }
-.polaroid-item:nth-child(2) { transform: rotate(2deg); }
-.polaroid-item:nth-child(3) { transform: rotate(-1deg); }
-.polaroid-item:nth-child(4) { transform: rotate(3deg); }
-.polaroid-item:nth-child(5) { transform: rotate(-2deg); }
-.polaroid-item:nth-child(6) { transform: rotate(1deg); }
+.polaroid-slide:nth-child(1) .polaroid-item { transform: rotate(-3deg); }
+.polaroid-slide:nth-child(2) .polaroid-item { transform: rotate(2deg); }
+.polaroid-slide:nth-child(3) .polaroid-item { transform: rotate(-1deg); }
+.polaroid-slide:nth-child(4) .polaroid-item { transform: rotate(3deg); }
+.polaroid-slide:nth-child(5) .polaroid-item { transform: rotate(-2deg); }
+.polaroid-slide:nth-child(6) .polaroid-item { transform: rotate(1deg); }
 
 .polaroid-item:hover {
   transform: scale(1.05) rotate(0deg) !important;
@@ -455,20 +457,63 @@ body {
 
 .polaroid-item__img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 1px;
-  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  margin-bottom: 12px;
 }
 
 .polaroid-item__caption {
   font-family: var(--font-serif);
-  font-size: 10px;
-  color: #333333;
+  font-size: 12px;
+  color: #2c3e50;
   text-align: center;
   font-style: italic;
   font-weight: 600;
+}
+
+/* Glassmorphic Carousel Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-gold);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+  background: var(--color-rose);
+  border-color: var(--color-rose);
+  box-shadow: 0 0 12px var(--color-rose);
+  color: #ffffff;
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.prev-btn {
+  left: 12px;
+}
+
+.next-btn {
+  right: 12px;
 }
 
 /* Dots Indicators */
